@@ -75,5 +75,23 @@ service / on new http:Listener(9091) {
         return response;
     }
 
+    resource function post auth/login(string email, string password) returns http:Response {
+
+        boolean userAuthenticated = false;
+        var response = new http:Response();
+        foreach var user in Users {
+            if (user.email == email && user.password == password) {
+                userAuthenticated = true;
+                break;
+            }
+        }
+        if (userAuthenticated) {
+            response.statusCode = 200;
+        } else {
+            response.statusCode = 401;
+        }
+        return response;
+    }
+
 }
 
