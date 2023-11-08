@@ -1,0 +1,97 @@
+openapi: 3.0.1
+info:
+  title: Api Openapi Yaml
+  version: 0.1.0
+servers:
+  - url: "{server}:{port}/"
+    variables:
+      server:
+        default: http://localhost
+      port:
+        default: "9091"
+paths:
+  /users:
+    get:
+      operationId: getUsers
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      operationId: postUsers
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Any Response
+          content:
+            "*/*":
+              schema:
+                description: Any type of entity body
+  /users/id:
+    get:
+      operationId: getUsersId
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+  /users/resetPassword:
+    post:
+      operationId: postUsersResetpassword
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Any Response
+          content:
+            "*/*":
+              schema:
+                description: Any type of entity body
+  /auth/login:
+    post:
+      operationId: postAuthLogin
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Any Response
+          content:
+            "*/*":
+              schema:
+                description: Any type of entity body
+components: {}
