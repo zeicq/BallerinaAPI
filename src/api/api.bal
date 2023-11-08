@@ -29,6 +29,7 @@ User[] Users = [
 service / on new http:Listener(9091) {
 
     resource function get users() returns json? {
+
         json[] userJsonArray = [];
         foreach var user in Users {
             json userJson = user.toJson();
@@ -38,12 +39,25 @@ service / on new http:Listener(9091) {
     }
 
     resource function get users/id(int id) returns json? {
+
         foreach var user in Users {
             if (user.id == id) {
                 return user.toJson();
             }
         }
         return null;
+    }
+
+    resource function post users(string email, string password) returns http:Response {
+
+        http:Response response = new;
+        var idUser = Users.length() + 1;
+        User user = new User(idUser, email, password);
+        Users.push(user);
+        response.setJsonPayload(user.toJson());
+        response.statusCode = 200;
+
+        return response;
     }
 
 }
