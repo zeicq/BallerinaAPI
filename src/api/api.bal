@@ -9,7 +9,13 @@ class User {
         self.id = id;
         self.email = email;
         self.password = password;
-
+    }
+    function toJson() returns json {
+        return {
+            "id": self.id,
+            "email": self.email,
+            "password": self.password
+        };
     }
 }
 
