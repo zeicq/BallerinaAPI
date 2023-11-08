@@ -37,5 +37,14 @@ service / on new http:Listener(9091) {
         return userJsonArray;
     }
 
+    resource function get users/id(int id) returns json? {
+        foreach var user in Users {
+            if (user.id == id) {
+                return user.toJson();
+            }
+        }
+        return null;
+    }
+
 }
 
