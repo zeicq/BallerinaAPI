@@ -60,5 +60,20 @@ service / on new http:Listener(9091) {
         return response;
     }
 
+    resource function post users/resetPassword(string email) returns http:Response {
+
+        var response = new http:Response();
+        foreach var user in Users {
+            if (user.email == email) {
+                response.statusCode = 202;
+                break;
+            }
+            else {
+                response.statusCode = 400;
+            }
+        }
+        return response;
+    }
+
 }
 
