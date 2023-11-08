@@ -1,10 +1,19 @@
-# Returns the string `Hello` with the input string name.
-#
-# + name - name as a string
-# + return - "Hello, " with the input string name
-public function hello(string name) returns string {
-    if !(name is "") {
-        return "Hello, " + name;
+import ballerina/http;
+
+class User {
+    int id;
+    string email;
+    string password;
+
+    function init(int id, string email, string password) {
+        self.id = id;
+        self.email = email;
+        self.password = password;
+
     }
-    return "Hello, World!";
 }
+
+service / on new http:Listener(9091) {
+
+}
+
